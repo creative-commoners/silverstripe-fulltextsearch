@@ -261,26 +261,6 @@ class Apache_Solr_DocumentTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($value, $fieldValue[0]);
 	}
 
-	/**
-	 *	setMultiValue has been deprecated and defers to addField
-	 *
-	 *	@deprecated
-	 */
-	public function testSetMultiValueCreateMultiValueWhenFieldDoesNotExist()
-	{
-		$field = 'field';
-		$value = 'value';
-
-		$this->_fixture->setMultiValue($field, $value);
-
-		// check that value is an array with correct values
-		$fieldValue = $this->_fixture->{$field};
-
-		$this->assertTrue(is_array($fieldValue));
-		$this->assertEquals(1, count($fieldValue));
-		$this->assertEquals($value, $fieldValue[0]);
-	}
-
 	public function testAddFieldCreatesMultiValueWhenFieldDoesExistAsSingleValue()
 	{
 		$field = 'field';
@@ -292,32 +272,6 @@ class Apache_Solr_DocumentTest extends PHPUnit_Framework_TestCase
 
 		// add a second value with addField
 		$this->_fixture->addField($field, $value2);
-
-		// check that value is an array with correct values
-		$fieldValue = $this->_fixture->{$field};
-
-		$this->assertTrue(is_array($fieldValue));
-		$this->assertEquals(2, count($fieldValue));
-		$this->assertEquals($value1, $fieldValue[0]);
-		$this->assertEquals($value2, $fieldValue[1]);
-	}
-
-	/**
-	 *	setMultiValue has been deprecated and defers to addField
-	 *
-	 *	@deprecated
-	 */
-	public function testSetMultiValueCreatesMultiValueWhenFieldDoesExistAsSingleValue()
-	{
-		$field = 'field';
-		$value1 = 'value1';
-		$value2 = 'value2';
-
-		// set first value as singular value
-		$this->_fixture->{$field} = $value1;
-
-		// add a second value with addField
-		$this->_fixture->setMultiValue($field, $value2);
 
 		// check that value is an array with correct values
 		$fieldValue = $this->_fixture->{$field};

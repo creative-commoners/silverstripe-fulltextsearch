@@ -1,7 +1,8 @@
-
 # FullTextSearch module
 
-[![Build Status](https://secure.travis-ci.org/silverstripe/silverstripe-fulltextsearch.png?branch=master)](http://travis-ci.org/silverstripe/silverstripe-fulltextsearch)
+[![Build Status](http://img.shields.io/travis/silverstripe/silverstripe-fulltextsearch.svg?style=flat)](https://travis-ci.org/silverstripe/silverstripe-fulltextsearch)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/silverstripe/silverstripe-fulltextsearch/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-fulltextsearch/?branch=master)
+[![codecov](https://codecov.io/gh/silverstripe/silverstripe-fulltextsearch/branch/master/graph/badge.svg)](https://codecov.io/gh/silverstripe/silverstripe-fulltextsearch)
 
 Adds support for fulltext search engines like Sphinx and Solr to SilverStripe CMS.
 
@@ -11,8 +12,10 @@ Adds support for fulltext search engines like Sphinx and Solr to SilverStripe CM
 
 ## Requirements
 
-* SilverStripe 3.1+
+* SilverStripe 4.0+
 * (optional) [silverstripe-phockito](https://github.com/hafriedlander/silverstripe-phockito) (for testing)
+
+**Note:** For SilverStripe 3.x, please use the [2.x release line](https://github.com/silverstripe/silverstripe-fulltextsearch/tree/2).
 
 ## Documentation
 
@@ -26,7 +29,7 @@ For details of updates, bugfixes, and features, please see the [changelog](CHANG
 used at query time for most of the same use cases
 
 * Fix field referencing in queries. Should be able to do `$query->search('Text', 'Content')`, not
-`$query->search('Text', 'SiteTree_Content')` like you have to do now
+`$query->search('Text', SiteTree::class . '_Content')` like you have to do now
 
     - Make sure that when field exists in multiple classes, searching against bare fields searches all of them
 

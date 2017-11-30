@@ -180,20 +180,6 @@ class Apache_Solr_Document implements IteratorAggregate
 	}
 
 	/**
-	 * Handle the array manipulation for a multi-valued field
-	 *
-	 * @param string $key
-	 * @param string $value
-	 * @param mixed $boost Use false for default boost, else cast to float that should be > 0 or will be treated as false
-	 *
-	 * @deprecated Use addField(...) instead
-	 */
-	public function setMultiValue($key, $value, $boost = false)
-	{
-		$this->addField($key, $value, $boost);
-	}
-
-	/**
 	 * Get field information
 	 *
 	 * @param string $key
