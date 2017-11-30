@@ -121,38 +121,4 @@ class Solr_Reindex extends Solr_BuildTask
         $handler->triggerReindex($this->getLogger(), $this->config()->recordsPerRequest, $taskName, $class);
     }
 
-    /**
-     * @deprecated since version 2.0.0
-     */
-    protected function runFrom($index, $class, $start, $variantstate)
-    {
-        DeprecationTest_Deprecation::notice('2.0.0', 'Solr_Reindex now uses a new grouping mechanism');
-
-        // Set time limit and state
-        increase_time_limit_to();
-        SearchVariant::activate_state($variantstate);
-
-        // Generate filtered list
-        $items = DataList::create($class)
-            ->limit($this->config()->recordsPerRequest, $start);
-
-        // Add child filter
-        $classes = $index->getClasses();
-        $options = $classes[$class];
-        if (!$options['include_children']) {
-            $items = $items->filter('ClassName', $class);
-        }
-
-        // Process selected records in this class
-        $this->getLogger()->info("Adding $class");
-        foreach ($items->sort("ID") as $item) {
-            $this->getLogger()->debug($item->ID);
-
-            // See SearchUpdater_ObjectHandler::triggerReindex
-            $item->triggerReindex();
-            $item->destroy();
-        }
-
-        $this->getLogger()->info("Done");
-    }
 }
